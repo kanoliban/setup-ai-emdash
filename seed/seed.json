@@ -1,0 +1,242 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Phone Repair",
+		"description": "Setup-AI phone repair shop theme with booking",
+		"author": "Setup-AI"
+	},
+
+	"settings": {
+		"title": "Revive",
+		"tagline": "Premium Device Repair"
+	},
+
+	"collections": [
+		{
+			"slug": "services",
+			"label": "Services",
+			"labelSingular": "Service",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Service Name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "price",
+					"label": "Price",
+					"type": "number"
+				},
+				{
+					"slug": "diagnostic_price",
+					"label": "Diagnostic Price",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"slug": "process_steps",
+			"label": "Process Steps",
+			"labelSingular": "Process Step",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Step Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "duration",
+					"label": "Duration",
+					"type": "string"
+				},
+				{
+					"slug": "step_order",
+					"label": "Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "faq",
+			"label": "FAQ",
+			"labelSingular": "FAQ Item",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "question",
+					"label": "Question",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "answer",
+					"label": "Answer",
+					"type": "text",
+					"required": true
+				},
+				{
+					"slug": "category",
+					"label": "Category",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": ["drafts", "revisions", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText"
+				}
+			]
+		}
+	],
+
+	"content": {
+		"services": [
+			{
+				"id": "display-assembly",
+				"slug": "display-assembly",
+				"status": "published",
+				"data": {
+					"title": "Display Assembly",
+					"description": "Complete OLED/LCD replacement. Restores True Tone functionality and original touch responsiveness.",
+					"price": 129
+				}
+			},
+			{
+				"id": "battery-subsystem",
+				"slug": "battery-subsystem",
+				"status": "published",
+				"data": {
+					"title": "Battery Subsystem",
+					"description": "High-capacity cell replacement. Eliminates unexpected shutdowns and restores peak performance.",
+					"price": 79
+				}
+			},
+			{
+				"id": "logic-board",
+				"slug": "logic-board",
+				"status": "published",
+				"data": {
+					"title": "Logic Board",
+					"description": "Micro-soldering and liquid damage recovery. Advanced component-level repair for critical failures.",
+					"diagnostic_price": 49
+				}
+			}
+		],
+		"process_steps": [
+			{
+				"id": "drop-off",
+				"slug": "drop-off",
+				"status": "published",
+				"data": {
+					"title": "Drop Off",
+					"description": "Bring your device to any Revive location. Our concierge team will perform a quick initial assessment and log your device into our secure queue.",
+					"duration": "10-15 MINS",
+					"step_order": 1
+				}
+			},
+			{
+				"id": "diagnose",
+				"slug": "diagnose",
+				"status": "published",
+				"data": {
+					"title": "Diagnose",
+					"description": "Specialized technicians perform a comprehensive 40-point inspection to identify the root cause. You receive a detailed report and fixed quote via SMS/Email.",
+					"duration": "1-2 HOURS",
+					"step_order": 2
+				}
+			},
+			{
+				"id": "repair",
+				"slug": "repair",
+				"status": "published",
+				"data": {
+					"title": "Repair",
+					"description": "We execute the repair using precision Grade-A components in an ESD-safe environment. Every device is calibrated to factory specifications after assembly.",
+					"duration": "SAME DAY",
+					"step_order": 3
+				}
+			},
+			{
+				"id": "pick-up",
+				"slug": "pick-up",
+				"status": "published",
+				"data": {
+					"title": "Pick Up",
+					"description": "A final QA specialist verifies all functions. You are notified that your device is ready for collection, backed by our 12-month standard warranty.",
+					"duration": "EST. 5 PM",
+					"step_order": 4
+				}
+			}
+		],
+		"faq": [
+			{
+				"id": "warranty",
+				"slug": "warranty",
+				"status": "published",
+				"data": {
+					"question": "What does the Revive Limited Warranty cover?",
+					"answer": "Our warranty covers all parts and labor for 12 months. This includes defects in materials and workmanship for any component replaced by our technicians.",
+					"category": "Warranty"
+				}
+			},
+			{
+				"id": "repair-time",
+				"slug": "repair-time",
+				"status": "published",
+				"data": {
+					"question": "How long does a standard display repair take?",
+					"answer": "Most display repairs are completed same-day, typically within 1-2 hours of your scheduled appointment.",
+					"category": "Turnaround"
+				}
+			},
+			{
+				"id": "diagnostic-fee",
+				"slug": "diagnostic-fee",
+				"status": "published",
+				"data": {
+					"question": "Are diagnostic fees refundable if I proceed with repair?",
+					"answer": "Yes. The $49 diagnostic fee is credited toward your repair if you choose to proceed. If you decline the repair, the diagnostic fee is non-refundable.",
+					"category": "Pricing"
+				}
+			},
+			{
+				"id": "tracking",
+				"slug": "tracking",
+				"status": "published",
+				"data": {
+					"question": "Can I track my repair status in real-time?",
+					"answer": "Yes. After drop-off, you receive a link to track your repair through every stage — from diagnostics to quality assurance to ready for pickup.",
+					"category": "Turnaround"
+				}
+			}
+		]
+	}
+}

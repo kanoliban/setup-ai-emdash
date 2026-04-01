@@ -1,0 +1,67 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../layouts/Base.astro";
+
+const { entries: services, cacheHint } = await getEmDashCollection("services", {
+	orderBy: { created_at: "asc" },
+});
+Astro.cache.set(cacheHint);
+---
+
+<Base title="Revive | Premium Device Repair">
+	<!-- Hero -->
+	<section class="relative overflow-hidden border-b border-border-subtle">
+		<div class="absolute inset-0 bg-[radial-gradient(circle_at_10%_50%,rgba(164,80,0,0.1)_0%,transparent_60%)]"></div>
+		<div class="relative mx-auto grid max-w-[1400px] grid-cols-[1.2fr_1fr] items-center gap-20 px-16 py-32">
+			<div class="max-w-[560px]">
+				<h1 class="mb-6 text-[64px] font-medium leading-[1.05] tracking-[-2px]" style="text-wrap: balance;">
+					Experience the next evolution in repair.
+				</h1>
+				<p class="mb-10 text-xl text-text-secondary">
+					Precision engineering meets expert service. We restore your devices
+					to factory condition with unprecedented speed and care.
+				</p>
+				<a
+					href="/book"
+					class="inline-flex items-center rounded-sm border border-white/10 bg-white/[0.08] px-9 py-3.5 text-[15px] font-medium text-text-primary transition-colors hover:bg-white/[0.12]"
+				>
+					Learn More
+				</a>
+			</div>
+
+			<div class="flex justify-center" style="perspective: 1000px;">
+				<div
+					class="relative h-[560px] w-[280px] rounded-[44px] border border-border-focus bg-gradient-to-b from-[#222] to-black shadow-[0_40px_80px_rgba(0,0,0,0.9)]"
+					style="transform: rotateY(-15deg) rotateX(5deg);"
+				>
+					<div class="absolute inset-[10px] rounded-[36px] bg-gradient-to-br from-white/5 to-transparent"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Services from EmDash CMS -->
+	<section class="mx-auto max-w-[1400px] px-16 py-20">
+		<div class="mb-6 flex items-center gap-2 text-[13px] text-text-secondary">
+			<span class="size-1 rounded-full bg-text-primary"></span>
+			Services
+		</div>
+		<div class="grid grid-cols-3 gap-8">
+			{services.map((service) => (
+				<div class="flex h-full flex-col rounded-xl border border-transparent bg-panel p-10 transition-all hover:-translate-y-1 hover:border-border-subtle hover:bg-panel-hover">
+					<h3 class="mb-2 text-xl font-medium tracking-tight">
+						{service.data.title}
+					</h3>
+					<p class="text-[16px] leading-relaxed text-text-secondary">
+						{service.data.description}
+					</p>
+					<div class="mt-auto pt-6 font-medium">
+						{service.data.price
+							? `From $${service.data.price}`
+							: `Diagnostic $${service.data.diagnostic_price}`}
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+</Base>

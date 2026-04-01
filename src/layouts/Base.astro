@@ -1,0 +1,99 @@
+---
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import "../styles/globals.css";
+
+interface Props {
+	title: string;
+	description?: string | null;
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { title, description, content } = Astro.props;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title,
+	description,
+});
+
+const NAV_LINKS = [
+	{ href: "/", label: "Services" },
+	{ href: "/book", label: "Book Repair" },
+	{ href: "/process", label: "Process" },
+	{ href: "/support", label: "Support" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="h-full antialiased">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		{description && <meta name="description" content={description} />}
+		<EmDashHead page={pageCtx} />
+	</head>
+	<body class="flex min-h-dvh">
+		<EmDashBodyStart page={pageCtx} />
+
+		<!-- Sidebar -->
+		<aside class="fixed left-0 top-0 z-50 flex h-dvh w-60 flex-col border-r border-border-subtle bg-base px-6 py-10">
+			<a href="/" class="flex items-center gap-3 text-xl font-medium tracking-wide">
+				<span class="size-4 rounded-sm bg-text-primary"></span>
+				REVIVE
+			</a>
+
+			<nav class="mt-16 flex flex-1 flex-col gap-6">
+				{NAV_LINKS.map((link) => {
+					const isActive = link.href === "/"
+						? currentPath === "/"
+						: currentPath.startsWith(link.href);
+					return (
+						<a
+							href={link.href}
+							class:list={[
+								"text-sm font-medium transition-colors",
+								isActive ? "text-text-primary" : "text-text-secondary hover:text-text-primary"
+							]}
+						>
+							{link.label}
+						</a>
+					);
+				})}
+			</nav>
+
+			<div class="flex items-center gap-3 border-t border-border-subtle pt-6 text-text-secondary">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+					<path d="M3 6h18" />
+					<path d="M16 10a4 4 0 0 1-8 0" />
+				</svg>
+				<span class="text-sm font-medium">Cart (0)</span>
+			</div>
+		</aside>
+
+		<!-- Main content -->
+		<div class="ml-60 flex min-h-dvh flex-1 flex-col">
+			<main class="flex-1">
+				<slot />
+			</main>
+
+			<footer class="border-t border-border-subtle px-16 py-16 text-[13px] text-text-secondary">
+				<div class="flex justify-between">
+					<div>&copy; {new Date().getFullYear()} Revive Technologies. All rights reserved.</div>
+					<div class="flex gap-6">
+						<a href="/privacy">Privacy</a>
+						<a href="/terms">Terms</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>
