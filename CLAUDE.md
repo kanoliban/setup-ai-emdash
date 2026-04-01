@@ -1,4 +1,8 @@
-This is an EmDash site -- a CMS built on Astro with a full admin UI.
+## Read VISION.md first.
+
+This is the Setup-AI platform — Shopify for independent service businesses. Read `VISION.md` for the product thesis, three-layer architecture (Website/OS/Mirror), vertical expansion plan, and all strategic decisions. Every session starts there.
+
+This repo is an EmDash site — a CMS built on Astro with a full admin UI.
 
 ## Commands
 

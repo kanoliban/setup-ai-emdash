@@ -21,6 +21,15 @@ export default defineConfig({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
+			plugins: [
+				{
+					id: "booking-test",
+					version: "0.0.1",
+					entrypoint: "./src/plugins/booking-test.ts",
+					capabilities: ["network:fetch", "read:content"],
+					allowedHosts: ["httpbin.org", "www.googleapis.com", "api.resend.com"],
+				},
+			],
 		}),
 	],
 	devToolbar: { enabled: false },
